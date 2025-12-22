@@ -1,9 +1,7 @@
-#include "Intersection.h"
+﻿#include "Intersection.h"
 #include <cstring>
 
-// ============================================================================
 // Constructor
-// ============================================================================
 Intersection::Intersection() {
     id = 0;
     trafficLight = new TrafficLight();
@@ -17,26 +15,24 @@ Intersection::Intersection() {
         laneBlocked[i] = false;
     }
 }
-
-// ============================================================================
-// Setters / Getters
-// ============================================================================
-void Intersection::setID(int i) { id = i; }
+//getters
 int Intersection::getID() const { return id; }
-void Intersection::setCrossingVehicle(Vehicle* v) { crossingVehicle = v; }
-void Intersection::setCrossingRemaining(int r) { crossingRemaining = r; }
-void Intersection::setNumLanes(int n) { numLanes = n; }
-void Intersection::setBlocked(bool b) { blocked = b; }
-bool Intersection::isBlocked() const { return blocked; }
-void Intersection::setLaneBlocked(int lane, bool b) { laneBlocked[lane] = b; }
 int Intersection::getTimeActive() const { return timeActive; }
 TrafficLight* Intersection::getTrafficLight() { return trafficLight; }
 Vehicle* Intersection::getCrossingVehicle() const { return crossingVehicle; }
 int Intersection::getCrossingRemaining() const { return crossingRemaining; }
 
-// ============================================================================
+//setters
+void Intersection::setID(int i) { id = i; }
+void Intersection::setCrossingVehicle(Vehicle* v) { crossingVehicle = v; }
+void Intersection::setCrossingRemaining(int r) { crossingRemaining = r; }
+void Intersection::setNumLanes(int n) { numLanes = n; }
+void Intersection::setBlocked(bool b) { blocked = b; }
+void Intersection::setLaneBlocked(int lane, bool b) { laneBlocked[lane] = b; }
+
+bool Intersection::isBlocked() const { return blocked; }
+
 // Vehicle Handling
-// ============================================================================
 void Intersection::addVehicle(Vehicle* v) {
     const char* type = v->getTYPE();
 
@@ -58,9 +54,6 @@ bool Intersection::removeVehicle(int id) {
     return false;
 }
 
-// ============================================================================
-// Simulation Logic (to be implemented / already implemented elsewhere)
-// ============================================================================
 void Intersection:: incrementTimeActive() {
     if (crossingVehicle != NULL) {
         timeActive++;
@@ -83,7 +76,7 @@ void Intersection::updateWaitingTimes(int currentTime, int autoP, int cancelT) {
 
         // Auto-promote if WT >= autoP
         if (autoP > 0 && curr->getWT() >= autoP && !curr->isPromoted()) {
-            // This will be handled by TrafficControlCenter through promotion events
+            // دى هتتنفذ من ال promotion events اللى فى ال TrafficControlCenter
             // For now, just update WT
         }
 
@@ -96,7 +89,7 @@ void Intersection::updateWaitingTimes(int currentTime, int autoP, int cancelT) {
     while (curr != NULL) {
         curr->setWT(currentTime - curr->getAT());
 
-        // Auto-cancel will be handled by TrafficControlCenter
+        // Auto-cancelهتتعمل ب ال TrafficControlCenter
 
         curr = curr->getNext();
     }
@@ -151,7 +144,7 @@ Vehicle* Intersection::selectNextVehicle() {
 }
 
 void Intersection::processCrossing() {
-    trafficLight->updateCooldown(); // Decrement cooldown
+    trafficLight->updateCooldown(); 
 
     if (crossingVehicle != NULL) {
         crossingRemaining--;
@@ -164,7 +157,6 @@ void Intersection::processCrossing() {
 
     // Can only select new vehicle if cooldown is done
     if (!trafficLight->canSwitch()) return;
-
     Vehicle* next = selectNextVehicle();
     if (next != NULL) {
         crossingVehicle = next;
@@ -175,9 +167,8 @@ void Intersection::processCrossing() {
 
 void Intersection::assignGreenLane() {
     if (crossingVehicle != NULL) {
-        return; // Already crossing
+        return; 
     }
-
     Vehicle* next = NULL;
 
     // Check priority: EV > PT > FV > NC
@@ -204,9 +195,7 @@ bool Intersection::canInterruptForEV() {
     return true;
 }
 
-// ============================================================================
 // Queue Access
-// ============================================================================
 PriorityQueue* Intersection::getEVQueue() { return &evQueue; }
 Queue* Intersection::getPTQueue() { return &ptQueue; }
 Queue* Intersection::getNCQueue() { return &ncQueue; }

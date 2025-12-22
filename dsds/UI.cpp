@@ -1,30 +1,20 @@
 #include "UI.h"
 #include "Intersection.h"
 
-// ============================================================================
 // Constructor
-// ============================================================================
 UI::UI() {}
 
-// ============================================================================
 // Input
-// ============================================================================
-void UI::printWelcome() {
-    cout << "================================================\n";
-    cout << "  Smart City Traffic Management System (TCC)\n";
-    cout << "================================================\n\n";
-}
-
 void UI::getInputFilename(char* filename) {
     cout << "Enter input filename: ";
     cin.getline(filename, 100);
 }
-
+//Output
 void UI::getOutputFilename(char* filename) {
     cout << "Enter output filename: ";
     cin.getline(filename, 100);
 }
-
+//allow user to choose the mood 
 int UI::getSimulationMode() {
     cout << "\nSelect Simulation Mode:\n";
     cout << "1. Interactive (press Enter to advance)\n";
@@ -37,10 +27,7 @@ int UI::getSimulationMode() {
     cin.ignore();
     return mode;
 }
-
-// ============================================================================
-// Output
-// ============================================================================
+//cmd output
 void UI::printTimestep(int time) {
     cout << "\n========================================\n";
     cout << "Current Timestep: " << time << "\n";
@@ -105,7 +92,7 @@ void UI::printIntersection(Intersection* inter, int intNum) {
 }
 
 void UI::waitForEnter() {
-    cout << "\nPress Enter to advance to next timestep...\n";
+    cout << "\nPress Enter...\n";
     cin.get();
 }
 

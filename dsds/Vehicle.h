@@ -1,9 +1,7 @@
 #pragma once
 #include <cstring>
 
-// ============================================================================
-// VEHICLE CLASS (HEADER ONLY - NO IMPLEMENTATION)
-// ============================================================================
+
 class Vehicle {
 private:
     int AT;           // Arrival Time
@@ -22,8 +20,7 @@ private:
 public:
     // Constructor
     Vehicle();
-
-    // ================= Getters =================
+    //getters
     int getAT() const;
     int getID() const;
     const char* getTYPE() const;
@@ -33,11 +30,12 @@ public:
     int getPR() const;
     int getWT() const;
     int getCT() const;
-    bool isCanceled() const;
-    bool isPromoted() const;
     Vehicle* getNext() const;
 
-    // ================= Setters =================
+    bool isCanceled() const;
+    bool isPromoted() const;
+
+    //setters
     void setAT(int at);
     void setID(int id);
     void setTYPE(const char* type);
@@ -51,6 +49,5 @@ public:
     void setPromoted(bool p);
     void setNext(Vehicle* n);
 
-    // ================= Logic =================
     double calculatePriority() const;
 };

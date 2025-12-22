@@ -1,9 +1,7 @@
 
 #pragma once
 
-// ============================================================================
-// TRAFFIC LIGHT CLASS
-// ============================================================================
+
 class TrafficLight {
 private:
     int currentGreenLane;
@@ -15,14 +13,11 @@ public:
     // Constructor
     TrafficLight();
 
-    // ================= Setters =================
     void setSwitchingCost(int cost);
 
-    // ================= Getters =================
     int getCurrentGreenLane() const;
     int getSwitchCount() const;
 
-    // ================= Logic =================
     bool canSwitch() const;
     void updateCooldown();
     void switchTo(int lane);

@@ -1,9 +1,8 @@
 #include "Event.h"
 #include <cstring>
 
-// ============================================================================
+// 
 // Constructor
-// ============================================================================
 Event::Event() {
     strcpy(type, "");
     strcpy(vehType, "");
@@ -11,9 +10,7 @@ Event::Event() {
     next = nullptr;
 }
 
-// ============================================================================
-// Getters
-// ============================================================================
+//getters
 const char* Event::getType() const { return type; }
 int Event::getTime() const { return time; }
 int Event::getVehicleID() const { return vehicleID; }
@@ -25,9 +22,7 @@ int Event::getXD() const { return xd; }
 int Event::getPR() const { return pr; }
 Event* Event::getNext() const { return next; }
 
-// ============================================================================
-// Setters
-// ============================================================================
+//setters
 void Event::setType(const char* t) { strcpy(type, t); }
 void Event::setTime(int t) { time = t; }
 void Event::setVehicleID(int id) { vehicleID = id; }
