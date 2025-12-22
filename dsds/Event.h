@@ -2,9 +2,7 @@
 #pragma once
 #include <cstring>
 
-// ============================================================================
-// EVENT CLASS
-// ============================================================================
+
 class Event {
 private:
     char type[5];     // A, X, P, ACC, RC
@@ -21,8 +19,7 @@ private:
 public:
     // Constructor
     Event();
-
-    // ================= Getters =================
+    //getters
     const char* getType() const;
     int getTime() const;
     int getVehicleID() const;
@@ -34,7 +31,7 @@ public:
     int getPR() const;
     Event* getNext() const;
 
-    // ================= Setters =================
+    //setters
     void setType(const char* t);
     void setTime(int t);
     void setVehicleID(int id);

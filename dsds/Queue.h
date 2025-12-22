@@ -2,9 +2,7 @@
 #include <iostream>
 #include "Vehicle.h"
 using namespace std;
-// ============================================================================
-// REGULAR QUEUE (FCFS) FOR PT, NC, FV
-// ============================================================================
+
 class Queue {
 private:
     Vehicle* head;

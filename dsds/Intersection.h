@@ -4,16 +4,13 @@
 #include "PriorityQueue.h"
 #include "Queue.h"
 
-// ============================================================================
-// INTERSECTION CLASS
-// ============================================================================
 class Intersection {
 private:
     int id;
-    PriorityQueue evQueue;    // Priority queue for EVs
-    Queue ptQueue;            // Regular queue for PT
-    Queue ncQueue;            // Regular queue for NC
-    Queue fvQueue;            // Regular queue for FV
+    PriorityQueue evQueue;    
+    Queue ptQueue;            
+    Queue ncQueue;           
+    Queue fvQueue;            
 
     TrafficLight* trafficLight;
     Vehicle* crossingVehicle;
@@ -27,21 +24,28 @@ public:
     // Constructor
     Intersection();
 
-    // ================= Setters / Getters =================
+    //setters
     void setID(int i);
-    int getID() const;
     void setNumLanes(int n);
     void setBlocked(bool b);
-    bool isBlocked() const;
     void setLaneBlocked(int lane, bool b);
+    void setCrossingVehicle(Vehicle* v);
+    void setCrossingRemaining(int r);
+
+    //getters
+    int getID() const;
     int getTimeActive() const;
     TrafficLight* getTrafficLight();
     Vehicle* getCrossingVehicle() const;
     int getCrossingRemaining() const;
-    void setCrossingVehicle(Vehicle* v);
-    void setCrossingRemaining(int r);
-    // ================= Core Logic =================
+    PriorityQueue* getEVQueue();
+    Queue* getPTQueue();
+    Queue* getNCQueue();
+    Queue* getFVQueue();
+
+    //logic
     void addVehicle(Vehicle* v);
+    bool isBlocked() const;
     bool removeVehicle(int id);
     void incrementTimeActive();
     void updateWaitingTimes(int currentTime, int autoP, int cancelT);
@@ -49,12 +53,5 @@ public:
     void processCrossing();
     void assignGreenLane();
     bool canInterruptForEV();
-
-    // ================= Queue Access =================
-    PriorityQueue* getEVQueue();
-    Queue* getPTQueue();
-    Queue* getNCQueue();
-    Queue* getFVQueue();
-
     bool hasVehicles() const;
 };

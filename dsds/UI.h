@@ -7,21 +7,16 @@ using namespace std;
 
 class Intersection;
 
-// ============================================================================
-// UI CLASS
-// ============================================================================
+
 class UI {
 public:
     // Constructor
     UI();
 
-    // ================= Input =================
-    void printWelcome();
     void getInputFilename(char* filename);
     void getOutputFilename(char* filename);
     int getSimulationMode();
 
-    // ================= Output =================
     void printTimestep(int time);
     void printIntersection(Intersection* inter, int intNum);
     void waitForEnter();

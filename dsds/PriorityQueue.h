@@ -1,4 +1,4 @@
-
+﻿
 #pragma once
 #include <iostream>
 #include "Vehicle.h"
@@ -12,7 +12,6 @@ public:
         head = NULL;
     }
 
-    // Insert in priority order (highest priority first)
     void enqueue(Vehicle* v) {
         double priority = v->calculatePriority();
 

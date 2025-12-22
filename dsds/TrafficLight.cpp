@@ -1,8 +1,6 @@
 #include "TrafficLight.h"
 
-// ============================================================================
 // Constructor
-// ============================================================================
 TrafficLight::TrafficLight() {
     currentGreenLane = -1;
     switchingCost = 0;
@@ -10,16 +8,12 @@ TrafficLight::TrafficLight() {
     switchCooldown = 0;
 }
 
-// ============================================================================
-// Setters
-// ============================================================================
+
 void TrafficLight::setSwitchingCost(int cost) {
     switchingCost = cost;
 }
 
-// ============================================================================
-// Getters
-// ============================================================================
+
 int TrafficLight::getCurrentGreenLane() const {
     return currentGreenLane;
 }
@@ -28,9 +22,7 @@ int TrafficLight::getSwitchCount() const {
     return switchCount;
 }
 
-// ============================================================================
-// Logic
-// ============================================================================
+
 bool TrafficLight::canSwitch() const {
     return switchCooldown <= 0;
 }
@@ -41,7 +33,7 @@ void TrafficLight::updateCooldown() {
 void TrafficLight::switchTo(int lane) {
     if (currentGreenLane != -1 && currentGreenLane != lane) {
         switchCount++;
-        switchCooldown = switchingCost; // Apply delay
+        switchCooldown = switchingCost; 
     }
     currentGreenLane = lane;
 }

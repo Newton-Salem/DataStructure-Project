@@ -29,7 +29,7 @@ private:
 
     UI* ui;
 
-    // Private helper functions
+    //helper functions
     void rerouteVehiclesFromIntersection(int intIdx);
     void handleArrival(Event* e);
     void handleEVInterrupt(int intIdx);

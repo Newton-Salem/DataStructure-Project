@@ -1,9 +1,9 @@
 #pragma once
 #include <iostream>
 using namespace std;
-// ============================================================================
-// ADJACENCY LIST NODE FOR REROUTING
-// ============================================================================
+
+//ADJACENCY LIST NODE FOR REROUTING
+
 class AdjNode {
 private:
     int intersection;
@@ -20,9 +20,9 @@ public:
     void setNext(AdjNode* n) { next = n; }
 };
 
-// ============================================================================
-// ADJACENCY LIST FOR INTERSECTION CONNECTIONS
-// ============================================================================
+
+//ADJACENCY LIST FOR INTERSECTION CONNECTIONS
+
 class AdjacencyList {
 private:
     AdjNode* head;

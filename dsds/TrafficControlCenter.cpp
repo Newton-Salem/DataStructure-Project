@@ -1,6 +1,6 @@
 #include "TrafficControlCenter.h"
 #include "AdjacencyList.h"
-#include "Queue.h"
+
 
 TrafficControlCenter::TrafficControlCenter(UI* userInterface) {
     ui = userInterface;
@@ -37,8 +37,8 @@ bool TrafficControlCenter::loadFromFile(const char* filename) {
     }
 
     char line[100];
-    infile.getline(line, 100); // Skip rest
-    infile.getline(line, 100); // "Connections:"
+    infile.getline(line, 100); 
+    infile.getline(line, 100); 
 
     for (int i = 0; i < numIntersections; i++) {
         int id;
@@ -101,7 +101,7 @@ bool TrafficControlCenter::loadFromFile(const char* filename) {
 }
 
 void TrafficControlCenter::insertEvent(Event* e) {
-    // Define event priorities for same timestamp
+    // Define the event priorities for same timestep
     auto getEventPriority = [](const char* type) {
         if (strcmp(type, "X") == 0) return 1;      // Cancellation first
         if (strcmp(type, "P") == 0) return 2;      // Promotion second
@@ -130,7 +130,7 @@ void TrafficControlCenter::insertEvent(Event* e) {
         return;
     }
 
-    // Find correct position
+    // Find correct position to insert the event
     Event* curr = eventHead;
     while (curr->getNext() != NULL) {
         Event* next = curr->getNext();
@@ -145,7 +145,6 @@ void TrafficControlCenter::insertEvent(Event* e) {
     e->setNext(curr->getNext());
     curr->setNext(e);
 }
-// Add this new method to TrafficControlCenter
 void TrafficControlCenter::checkAutoPromotions() {
     if (autoP <= 0) return;
 
@@ -181,7 +180,7 @@ void TrafficControlCenter::rerouteVehiclesFromIntersection(int intIdx) {
     while (curr != NULL) {
         Vehicle* next = curr->getNext();
         curr->setINT(nearestInt);
-        curr->setWT(curr->getWT() + 2); // 2 timestep penalty
+        curr->setWT(curr->getWT() + 2); 
         curr = next;
     }
     // Move all EVs to new intersection
@@ -246,8 +245,6 @@ void TrafficControlCenter::checkAutoCancellations() {
                 cancelEvent->setTime(currentTime + 1);
                 cancelEvent->setVehicleID(curr->getID());
                 insertEvent(cancelEvent);
-
-                // Don't mark as canceled yet, the event will do it
             }
             curr = curr->getNext();
         }
@@ -299,7 +296,7 @@ void TrafficControlCenter::handleEVInterrupt(int intIdx) {
             return;
         }
 
-        // CRITICAL: Clear crossing state BEFORE re-enqueueing
+        //Clear crossing state BEFORE re-enqueueing
         inter->setCrossingVehicle(NULL);
         inter->setCrossingRemaining(0);
         inter->getTrafficLight()->reset();
@@ -344,9 +341,9 @@ void TrafficControlCenter::handleCancellation(Event* e) {
 
     for (int i = 0; i < vehicleCount; i++) {
         if (allVehicles[i] != NULL && allVehicles[i]->getID() == e->getVehicleID()) {
-            // Ignore if already crossed (CT > 0)
+            // Ignore if already crossed
             if (allVehicles[i]->getCT() > 0) {
-                break;  // Vehicle already crossed, ignore cancellation
+                break; 
             }
 
             allVehicles[i]->setCanceled(true);
@@ -426,13 +423,13 @@ void TrafficControlCenter::processAllCrossing() {
 
         intersections[i]->processCrossing();
 
-        // If vehicle just completed crossing
+        // If vehicle just completed crossing clear it
         if (v != NULL && remainingBefore == 1 &&
             intersections[i]->getCrossingRemaining() == 0) {
             v->setCT(currentTime);
             v->setNext(completedVehicles);
             completedVehicles = v;
-            intersections[i]->setCrossingVehicle(NULL);  // Clear the reference
+            intersections[i]->setCrossingVehicle(NULL); 
         }
     }
 }
@@ -450,14 +447,14 @@ void TrafficControlCenter::simulate(int mode) {
     while (hasActiveVehicles()) {
         if (mode == 1 || mode == 2) ui->printTimestep(currentTime);
 
-        updateAllWaitingTimes();  // Update waiting times first
-        checkAutoPromotions();    // Check for auto-promotions
-        checkAutoCancellations(); // Check for auto-cancellations
-        processEvents();          // Process all events at current timestep
-        assignGreenLanes();       // Assign green lanes
-        processAllCrossing();     // Process crossing vehicles
+        updateAllWaitingTimes(); 
+        checkAutoPromotions();   
+        checkAutoCancellations();
+        processEvents();          
+        assignGreenLanes();       
+        processAllCrossing();    
 
-        // REQ #19: Increment time active ONCE per timestep
+        //Increment time active per timestep
         for (int i = 0; i < numIntersections; i++) {
             intersections[i]->incrementTimeActive();
         }
@@ -495,7 +492,7 @@ void TrafficControlCenter::sortVehiclesByCT() {
         }
     }
 
-    // Sort completed vehicles by CT (bubble sort)
+    // Sort completed vehicles by CT 
     for (int i = 0; i < completedCount - 1; i++) {
         for (int j = 0; j < completedCount - i - 1; j++) {
             if (completed[j]->getCT() > completed[j + 1]->getCT()) {
@@ -506,7 +503,7 @@ void TrafficControlCenter::sortVehiclesByCT() {
         }
     }
 
-    // Sort canceled vehicles by ID (for consistent output)
+    // Sort canceled vehicles by ID
     for (int i = 0; i < canceledCount - 1; i++) {
         for (int j = 0; j < canceledCount - i - 1; j++) {
             if (canceled[j]->getID() > canceled[j + 1]->getID()) {
@@ -517,7 +514,6 @@ void TrafficControlCenter::sortVehiclesByCT() {
         }
     }
 
-    // Merge back: completed first (sorted by CT), then canceled (sorted by ID)
     int idx = 0;
     for (int i = 0; i < completedCount; i++) {
         allVehicles[idx++] = completed[i];
@@ -529,7 +525,7 @@ void TrafficControlCenter::sortVehiclesByCT() {
 
 
 void TrafficControlCenter::writeOutput(const char* filename) {
-    // REQ #20: Sort vehicles before writing output
+    //Sort vehicles before writing the output
     sortVehiclesByCT();
 
     std::ofstream outfile(filename);
@@ -545,7 +541,7 @@ void TrafficControlCenter::writeOutput(const char* filename) {
     int countEV = 0, countPT = 0, countNC = 0, countFV = 0;
     int totalSwitches = 0;
 
-    // REQ #19: Calculate intersection utilization
+    //Calculate intersection utilization
     int totalTimeActive = 0;
     int totalPossibleTime = currentTime * numIntersections;
 
@@ -561,7 +557,7 @@ void TrafficControlCenter::writeOutput(const char* filename) {
 
     outfile << "CT ID AT WT XD TYPE INT LN\n";
 
-    // Write vehicle data (now sorted by CT)
+    // Write vehicle data
     for (int i = 0; i < vehicleCount; i++) {
         Vehicle* v = allVehicles[i];
         if (!v) continue;
@@ -662,7 +658,6 @@ void TrafficControlCenter::writeOutput(const char* filename) {
         ((double)totalCanceled / vehicleCount * 100.0) : 0.0;
     outfile << "% Vehicles Canceled: " << cancelPercent << "%\n";
 
-    // REQ #19: Intersection utilization (optional but good to have)
     if (totalPossibleTime > 0) {
         double utilization = ((double)totalTimeActive / totalPossibleTime) * 100.0;
         outfile << "Intersection Utilization: " << utilization << "%\n";

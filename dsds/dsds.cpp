@@ -6,13 +6,9 @@ using namespace std;
 #include "UI.h"
 #include "TrafficControlCenter.h"
 
-// ============================================================================
-// MAIN FUNCTION
-// ============================================================================
+
 int main() {
     UI ui;
-    ui.printWelcome();
-
     char inputFile[100];
     char outputFile[100];
 
