@@ -1,0 +1,40 @@
+Intersection Utilization: 53.0303%
+CT ID AT WT XD TYPE INT LN
+4 103 2 0 2 EV 1 2
+7 104 2 0 5 PT 3 1
+8 101 1 4 3 NC 1 1
+9 107 4 2 4 PT 6 1
+11 108 4 5 2 NC 1 1
+12 112 6 4 2 EV 4 2
+12 119 10 0 2 EV 3 2
+15 117 9 1 5 NC 6 1
+15 123 13 0 2 EV 2 1
+17 120 11 2 4 NC 4 1
+17 122 12 0 5 PT 1 2
+20 116 8 6 4 EV 5 1
+21 118 10 6 5 EV 2 2
+23 110 5 11 7 FV 6 1
+24 115 8 10 6 FV 1 2
+25 113 7 14 4 EV 5 2
+27 109 5 17 5 EV 2 2
+32 102 1 27 4 EV 2 1
+32 121 12 14 6 FV 5 1
+-- 105 3 6 6 FV 4 1 CANCELED
+-- 106 3 4 3 NC 2 2 CANCELED
+-- 111 6 14 3 NC 5 1 CANCELED
+-- 114 7 14 3 NC 2 1 CANCELED
+
+Total Vehicles: 23
+Total EV: 9 (including promotions)
+Total PT: 3 (5 promoted)
+Total NC: 7 (3 canceled)
+Total FV: 4
+Average WT (all): 7
+Average WT (EV): 8.22222
+Average WT (PT): 0.666667
+Average WT (NC): 6.28571
+Average WT (FV): 10.25
+Average XD: 4
+% Auto-Promoted PT: 62.5%
+Signal Switches: 3
+% Vehicles Canceled: 17.3913%
