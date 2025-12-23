@@ -1,0 +1,8 @@
+Members’ Info:
+
+Member Name	 ID	        Email
+Mohamed Essam	 202401171	s-mohamed.salem@zewailcity.edu.eg
+Ahmed Mahmoud	 202401491	s-ahmed.abda@zewailcity.edu.eg
+Habiba Mohammed	 202402213	s-habiba.mohammed@zewailcity.edu.eg
+Radwa Abdelsadek 202402355	s-radwa.salah@zewailcity.edu.eg
+

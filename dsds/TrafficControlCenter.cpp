@@ -37,8 +37,7 @@ bool TrafficControlCenter::loadFromFile(const char* filename) {
     }
 
     char line[100];
-    infile.getline(line, 100); 
-    infile.getline(line, 100); 
+    infile.getline(line, 100);  
 
     for (int i = 0; i < numIntersections; i++) {
         int id;
