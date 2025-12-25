@@ -134,8 +134,8 @@ Includes:
 
 ## ▶️ How to Run
 ```bash
-g++ *.cpp -o TrafficSim
-./TrafficSim
+g++ *.cpp -o dsds
+./dsds
 `````
 ## Then select:
 ### Simulation mode
